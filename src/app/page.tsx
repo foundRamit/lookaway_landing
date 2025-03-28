@@ -53,8 +53,8 @@ export default function Home() {
           <Image 
             src="/lookaway-preview.png" 
             alt="Lookaway App Interface" 
-            width={600} 
-            height={400} 
+            width={500} 
+            height={300} 
             className="rounded-2xl shadow-2xl border border-gray-700 transform hover:scale-105 transition-transform"
           />
           <div className="absolute -top-10 -right-10 bg-blue-500/20 w-32 h-32 rounded-full blur-2xl"></div>
