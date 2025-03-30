@@ -29,25 +29,24 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={`relative min-h-screen transition-all duration-500 ${darkMode ? 'bg-[#0a0f1f] text-white' : 'bg-gradient-to-br from-blue-100 via-white to-purple-100 text-gray-900'}`}>
-      {/* Background with Grid Lines */}
+    <div className={`relative min-h-screen transition-all duration-500 ${
+      darkMode ? 'bg-[#0a0f1f] text-white' : 'bg-gradient-to-br from-blue-50 to-purple-100 text-gray-900'
+    }`}>
+      {/* Abstract Background Pattern */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
-        <svg className="absolute w-full h-full opacity-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {/* Horizontal Lines */}
-          {[...Array(10)].map((_, i) => (
-            <line key={`h-${i}`} x1="0" y1={i * 10} x2="100" y2={i * 10} stroke={darkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(100, 100, 255, 0.3)"} strokeWidth="0.5" />
-          ))}
-          {/* Vertical Lines */}
-          {[...Array(10)].map((_, i) => (
-            <line key={`v-${i}`} x1={i * 10} y1="0" x2={i * 10} y2="100" stroke={darkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(100, 100, 255, 0.3)"} strokeWidth="0.5" />
-          ))}
-        </svg>
+        <div className={`absolute w-full h-full ${
+          darkMode ? 'bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.05),_transparent)]' 
+          : 'bg-[radial-gradient(circle_at_top_right,_rgba(100,100,255,0.2),_transparent)]'
+        }`}></div>
       </div>
 
       <nav className="w-full flex justify-between items-center p-6 relative z-10">
         <div className="flex items-center space-x-3">
           <EyeOff className="w-8 h-8 text-blue-500" />
-          <span className={`text-2xl font-bold ${darkMode ? 'bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent' : 'bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent'}`}>
+          <span className={`text-2xl font-bold ${
+            darkMode ? 'bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent' 
+            : 'bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent'
+          }`}>
             Lookaway
           </span>
         </div>
@@ -68,9 +67,11 @@ export default function Home() {
 
       <main className="flex flex-col items-center text-center space-y-10 p-6 relative z-10">
         {/* Updated Text Background for Visibility */}
-        <div className={`p-6 rounded-xl shadow-lg max-w-3xl ${darkMode ? 'bg-black/50 text-white' : 'bg-white/90 text-gray-900 border border-gray-300 shadow-xl'}`}>
+        <div className={`p-6 rounded-xl shadow-lg max-w-3xl ${
+          darkMode ? 'bg-black/50 text-white' : 'bg-white/90 text-gray-900 border border-gray-300 shadow-xl'
+        }`}>
           <h1 className="text-5xl font-bold">
-          Smart breaks for healthy eyes and a focused mind
+            Smart breaks for healthy eyes and a focused mind
           </h1>
           <p className="text-lg mt-4">
             Lookaway reminds you to take strategic breaks, reducing eye strain and keeping you focused.
@@ -90,10 +91,10 @@ export default function Home() {
 
         {/* Release Information Now Stands Out */}
         {latestRelease && (
-            <p className={`text-lg font-semibold p-2 rounded-lg shadow-md transition-all 
-            ${darkMode ? 'text-green-400 bg-black/50' : 'text-green-700 bg-gray-200 border border-gray-400'}`}>
-          🚀 New stable release {latestRelease.tag_name}
-            </p>
+          <p className={`text-lg font-semibold p-2 rounded-lg shadow-md transition-all 
+          ${darkMode ? 'text-green-400 bg-black/50' : 'text-green-700 bg-gray-200 border border-gray-400'}`}>
+            🚀 New stable release {latestRelease.tag_name}
+          </p>
         )}
 
         <div className="flex flex-col space-y-4">
