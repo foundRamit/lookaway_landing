@@ -100,7 +100,7 @@ export default function Home() {
         <div className="flex flex-col space-y-4">
           <Link
             id="download"
-            href="#"
+            href={latestRelease?.assets?.[0]?.browser_download_url || "#"}
             className="flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:scale-105 transition-transform"
           >
             <ArrowDownToLine className="w-5 h-5" />
