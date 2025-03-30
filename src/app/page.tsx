@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowDownToLine, EyeOff } from 'lucide-react';
+import { ArrowDownToLine, EyeOff, Sun, Moon } from 'lucide-react';
 
 type GitHubRelease = {
   tag_name: string;
@@ -13,6 +13,7 @@ type GitHubRelease = {
 
 export default function Home() {
   const [latestRelease, setLatestRelease] = useState<GitHubRelease | null>(null);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     async function fetchLatestRelease() {
@@ -28,70 +29,92 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-black font-sans overflow-hidden">
-      <header className="absolute top-0 left-0 w-full p-4 text-center z-30">
-        <pre className="text-white font-mono text-sm tracking-tight"></pre>
-      </header>
-
-      <div className="relative z-20">
-        <nav className="px-6 py-4 flex justify-between items-center max-w-6xl mx-auto">
-          <div className="flex items-center space-x-3">
-            <EyeOff className="w-8 h-8 text-blue-400" />
-            <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-              Lookaway
-            </span>
-          </div>
-          <div className="space-x-6">
-            <Link href="#features" className="hover:text-blue-400 transition-colors">
-              Features
-            </Link>
-            <Link href="#download" className="hover:text-blue-400 transition-colors">
-              Download
-            </Link>
-          </div>
-        </nav>
-
-        <main className="container mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-              Protect Your Eyes, Boost Your Productivity
-            </h1>
-            <p className="text-xl text-gray-300 max-w-xl">
-              Lookaway uses intelligent automation to remind you to take strategic breaks, reducing eye strain and keeping you focused.
-            </p>
-            {latestRelease && (
-              <p className="text-lg font-semibold text-green-400">
-                🚀 New stable release {latestRelease.tag_name}
-              </p>
-            )}
-            <div className="flex space-x-4">
-              <Link
-                href="#download"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-6 py-3 rounded-full font-semibold text-white flex items-center space-x-2 transition-transform hover:scale-105 shadow-lg"
-              >
-                <ArrowDownToLine className="w-5 h-5" />
-                <span>Download Now</span>
-              </Link>
-              <Link
-                href="#features"
-                className="border border-gray-600 px-6 py-3 rounded-full text-gray-300 hover:bg-gray-800 transition-colors flex items-center space-x-2"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
-          <div className="relative">
-            <Image
-              src="/lookaway-preview.png"
-              alt="Lookaway App Interface"
-              width={500}
-              height={300}
-              className="rounded-2xl shadow-2xl border border-gray-700 transform hover:scale-105 transition-transform"
-            />
-            <div className="absolute -top-10 -right-10 bg-blue-500/20 w-32 h-32 rounded-full blur-2xl"></div>
-          </div>
-        </main>
+    <div className={`relative min-h-screen transition-all duration-500 ${
+      darkMode ? 'bg-[#0a0f1f] text-white' : 'bg-gradient-to-br from-blue-50 to-purple-100 text-gray-900'
+    }`}>
+      {/* Abstract Background Pattern */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+        <div className={`absolute w-full h-full ${
+          darkMode ? 'bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.05),_transparent)]' 
+          : 'bg-[radial-gradient(circle_at_top_right,_rgba(100,100,255,0.2),_transparent)]'
+        }`}></div>
       </div>
+
+      <nav className="w-full flex justify-between items-center p-6 relative z-10">
+        <div className="flex items-center space-x-3">
+          <EyeOff className="w-8 h-8 text-blue-500" />
+          <span className={`text-2xl font-bold ${
+            darkMode ? 'bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent' 
+            : 'bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent'
+          }`}>
+            Lookaway
+          </span>
+        </div>
+        
+        {/* Navigation Links & Theme Toggle */}
+        <div className="flex items-center space-x-6">
+          <a href="#download" className="text-lg font-semibold underline text-blue-400 hover:text-blue-500 transition">
+            Download
+          </a>
+          <a href="#features" className="text-lg font-semibold underline text-blue-400 hover:text-blue-500 transition">
+            Features
+          </a>
+          <button onClick={() => setDarkMode(!darkMode)} className="p-2 rounded-full bg-gray-800 text-white dark:bg-gray-200 dark:text-black transition">
+            {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+          </button>
+        </div>
+      </nav>
+
+      <main className="flex flex-col items-center text-center space-y-10 p-6 relative z-10">
+        {/* Updated Text Background for Visibility */}
+        <div className={`p-6 rounded-xl shadow-lg max-w-3xl ${
+          darkMode ? 'bg-black/50 text-white' : 'bg-white/90 text-gray-900 border border-gray-300 shadow-xl'
+        }`}>
+          <h1 className="text-5xl font-bold">
+            Smart breaks for healthy eyes and a focused mind
+          </h1>
+          <p className="text-lg mt-4">
+            Lookaway reminds you to take strategic breaks, reducing eye strain and keeping you focused.
+          </p>
+        </div>
+
+        {/* Image Now Has a Proper Border to Separate from Text */}
+        <div className="relative">
+          <Image
+            src="/lookaway-preview.png"
+            alt="Lookaway App Interface"
+            width={500}
+            height={300}
+            className="rounded-2xl shadow-2xl border-4 border-gray-600"
+          />
+        </div>
+
+        {/* Release Information Now Stands Out */}
+        {latestRelease && (
+          <p className={`text-lg font-semibold p-2 rounded-lg shadow-md transition-all 
+          ${darkMode ? 'text-green-400 bg-black/50' : 'text-green-700 bg-gray-200 border border-gray-400'}`}>
+            🚀 New stable release {latestRelease.tag_name}
+          </p>
+        )}
+
+        <div className="flex flex-col space-y-4">
+          <Link
+            id="download"
+            href="#"
+            className="flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:scale-105 transition-transform"
+          >
+            <ArrowDownToLine className="w-5 h-5" />
+            <span>Download Now</span>
+          </Link>
+          <Link
+            id="features"
+            href="#"
+            className="border border-gray-600 px-6 py-3 rounded-full text-gray-900 bg-gray-200 hover:bg-gray-300 transition-colors"
+          >
+            Learn More
+          </Link>
+        </div>
+      </main>
     </div>
   );
 }
